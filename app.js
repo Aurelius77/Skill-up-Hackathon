@@ -7,10 +7,42 @@ const mobileTrialCard = document.querySelector('.mobile-trial')
 const show = document.querySelector('.show')
 const closeSteps = document.querySelector('.close')
 const steps = document.querySelector('.steps')
+const checked = document.querySelectorAll('.checked')
+const unchecked = document.querySelectorAll('.unchecked')
+const progress = document.querySelector('.progress-bar')
+
+let completed = 0
 
 
+let isStepOpen = false
 let displayAlert = false
 let displayMenu = false
+
+/*PROGRESS BARS*/
+
+unchecked.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+
+        completed += 1
+        progress.style.width = `${completed * 20}%`
+        document.querySelector('.progress-text').innerHTML = completed + ' /5 completed'
+        unchecked[index].style.display = 'none';
+        checked[index].style.display = 'block';
+    })
+})
+
+checked.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+
+        completed -= 1
+        progress.style.width = `${completed * 20}%`
+        document.querySelector('.progress-text').innerHTML = completed + ' /5 completed'
+        unchecked[index].style.display = 'block';
+        checked[index].style.display = 'none';
+    })
+})
+
+/*CLOSE STEPS CONTAINER*/
 
 closeSteps.addEventListener('click', () => {
     steps.style.display = 'none'
@@ -24,6 +56,8 @@ show.addEventListener('click', () => {
     closeSteps.style.display = 'block'
 })
 
+
+/*delete the trial modal*/
 document.querySelectorAll('.delete').forEach((btn) => {
     btn.addEventListener('click', () => {
         trialCard.style.display = 'none'
@@ -31,6 +65,8 @@ document.querySelectorAll('.delete').forEach((btn) => {
     })
 })
 
+
+/*TOGGLE THE MENU*/
 menuBtn.addEventListener('click', () => {
     displayMenu = !displayMenu
     console.log(displayMenu)
@@ -44,6 +80,7 @@ menuBtn.addEventListener('click', () => {
 })
 
 
+/*TOGGLE THE ALERTS*/
 bell.addEventListener('click', () => {
     displayAlert = !displayAlert
 
@@ -55,4 +92,37 @@ bell.addEventListener('click', () => {
     }
 
 })
+
+const stepBox = document.querySelectorAll('.step');
+
+stepBox.forEach((step) => {
+    let isStepOpen = false;
+
+    step.addEventListener('click', () => {
+        const info = step.querySelector('.info');
+
+        const allOtherInfos = document.querySelectorAll('.info:not(.info-' + step.id + ')');
+        allOtherInfos.forEach((otherInfo) => {
+            otherInfo.classList.remove('open');
+        });
+
+        if (isStepOpen) {
+            info.classList.remove('open');
+        } else {
+            info.classList.add('open');
+        }
+
+        isStepOpen = !isStepOpen;
+
+        if (!isStepOpen) {
+            const nextStep = step.nextElementSibling;
+            if (nextStep) {
+                const nextInfo = nextStep.querySelector('.info');
+                nextInfo.classList.add('open');
+                isStepOpen = true;
+            }
+        }
+    });
+});
+
 

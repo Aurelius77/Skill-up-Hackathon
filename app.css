@@ -304,6 +304,18 @@ hr{
     .container{
         width: 100%;
     }
+
+    .info{
+        display: block;
+    }
+
+    .info img{
+        display: none;
+    }
+
+    .open{
+        display: block;
+    }
 }
 
 
@@ -340,7 +352,7 @@ hr{
 }
 
 .progress-cont{
-    margin-left: 6px;
+    margin-left: 8px;
     width: 72px;
     height: 4px;
     background-color: #E3E3E3;;
@@ -352,7 +364,7 @@ hr{
     background-color: black;
 }
 
-.close{
+.close, .close-info{
     display: none;
 }
 
@@ -370,6 +382,12 @@ hr{
     margin-bottom: 10px;
     background-color: #F1F1F1;
     padding: 4px;
+    cursor: pointer;
+}
+
+
+.checked{
+    display: none;
 }
 .entry{
     width: 100%;
@@ -384,11 +402,16 @@ hr{
 
 .info{
     width: 100%;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
 }
+
+.open{
+    display: flex;
+}
+
 
 .left{
     display: flex;
